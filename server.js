@@ -9,7 +9,9 @@ app.use(express.json());
 const postHandler=require('./routes/PostHandler')
 app.use(postHandler)
 
-
+app.get('/',(req,res)=>{
+    res.send('this instagram Kore.ai deployment channel')
+})
 
 app.listen(process.env.PORT ||3232, () => {
     console.log("Listening at http://localhost:3232");
