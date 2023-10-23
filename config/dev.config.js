@@ -4,7 +4,7 @@ module.exports={
         ACCESS_SECRET:"yklxIVztVuPriBxZOST-Q8gwJU"
     },
     koreConfig:{
-        WEBHOOK_URL:"https://bots.kore.ai/chatbot/v2/webhook/st-d669ff6a-8d87-5daa-b66c-b0a9c3e838ae/hookInstance/ivrInst-16bb8356-9d12-57e3-a0c2-b6128a9e356b",
-        AUTH_TOKEN:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImNzLTJlOTFmZjQ2LTcyM2QtNTUyNy1iMmU3LTI3YWU5YmJlODRlNCIsInN1YiI6Ikluc3RhZ3JhbVdlYmhvb2sifQ.FDA_ADF2-maFQwZAF8rCOfa9PdgVAHHMrJm1oqhuYHo"
+        WEBHOOK_URL:"https://bots.kore.ai/chatbot/v2/webhook/st-e113c2f6-f022-5b95-a3bc-01b44fd9fe8a",
+        AUTH_TOKEN:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImNzLWU5YjY4NWE2LTRjZDQtNWMyYi1hMjk0LTUyZTZjYTJkNzM2OSJ9.pdMV6wwtWngWcRVvvvVJH2UlyI3CP5czculsvr05jjQ"
     }
 }
