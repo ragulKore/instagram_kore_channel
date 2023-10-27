@@ -21,10 +21,25 @@ const incomingMsgHandler=async (req, res) => {
                 contact_id: requestBody.message.contact_id
             },
             message: {
+            choice_message: {    
                 text_message: {
                     text:data.data[0].val
-                }
-            },
+                },
+                choices: [
+                    {
+                    text_message: {
+                        text: "Confirm"
+                    }
+                    },
+                    {
+                    text_message: {
+                        text: "not confirm"
+                    }
+                    }
+                    ]
+        }
+    
+    },
             channel_priority_order: [requestBody.message.channel_identity.channel]
         };
 
