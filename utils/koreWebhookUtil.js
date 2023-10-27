@@ -29,4 +29,16 @@ const koreWebhookFetch=async(message)=>{
     }
     
 }
-module.exports={koreWebhookFetch}
+const KoreMsgPreprocessor=(requestBody)=>{
+    if(requestBody.message.contact_message.text_message?.text!=undefined)
+    {
+        return requestBody.message.contact_message.text_message?.text
+    }else{
+        let msg=requestBody.message.contact_message.choice_response_message?.postback_data
+        console.log('in preprocessor',msg)
+        msg=msg.split("_")
+        return msg[1]
+    }
+
+}
+module.exports={koreWebhookFetch,KoreMsgPreprocessor}

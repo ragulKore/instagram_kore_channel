@@ -1,16 +1,18 @@
 const fetch = require('cross-fetch');
-const {koreWebhookFetch}=require('../utils/koreWebhookUtil')
+const {koreWebhookFetch,KoreMsgPreprocessor}=require('../utils/koreWebhookUtil')
 const config=require('../config')
 //handler for msg handler(webhook url)
 const incomingMsgHandler=async (req, res) => {
     console.log('in msg handler')
     var requestBody = req.body;
+    console.log(requestBody)
 
     if (requestBody.message != undefined) {
-    console.log(requestBody.message.contact_message.text_message.text);
+        const  incoming_msg=KoreMsgPreprocessor(requestBody)
+    console.log(incoming_msg);
 
     //webhook call to kore.ai bot
-   const [data,err]= await koreWebhookFetch(requestBody.message.contact_message.text_message.text)
+   const [data,err]= await koreWebhookFetch(incoming_msg)
     if(err) return  res.sendStatus(400)
     console.log(data)
 
@@ -20,26 +22,7 @@ const incomingMsgHandler=async (req, res) => {
             recipient: {
                 contact_id: requestBody.message.contact_id
             },
-            message: {
-            choice_message: {    
-                text_message: {
-                    text:data.data[0].val
-                },
-                choices: [
-                    {
-                    text_message: {
-                        text: "Confirm"
-                    }
-                    },
-                    {
-                    text_message: {
-                        text: "not confirm"
-                    }
-                    }
-                    ]
-        }
-    
-    },
+            message: JSON.parse(data.data[0].val),
             channel_priority_order: [requestBody.message.channel_identity.channel]
         };
 
