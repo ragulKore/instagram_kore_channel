@@ -4,8 +4,8 @@ module.exports={
         ACCESS_SECRET:"yklxIVztVuPriBxZOST-Q8gwJU"
     },
     koreConfig:{
-        WEBHOOK_URL:"https://bots.kore.ai/chatbot/v2/webhook/st-9b6d1fee-aade-518c-94a9-4fbd13b728f0/hookInstance/ivrInst-e61ae0e1-3a9b-555f-95b0-8eab61d79b1e",
-        AUTH_TOKEN:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiYXBwSWQiOiJjcy02Mzg2NDE0My1iNzBkLTVkN2ItYWNkZC02YTM2MWEwZmMwNDIifQ.zZeK-ijirueh6WOSMkeE2Cp1UDTmP437Af9VRvXjTno"
+        WEBHOOK_URL:"https://bots.kore.ai/chatbot/v2/webhook/st-e113c2f6-f022-5b95-a3bc-01b44fd9fe8a",
+        AUTH_TOKEN:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImNzLWU5YjY4NWE2LTRjZDQtNWMyYi1hMjk0LTUyZTZjYTJkNzM2OSJ9.pdMV6wwtWngWcRVvvvVJH2UlyI3CP5czculsvr05jjQ"
     },
     KoreDataTableConfig:{
         TABLE_NAME:"instagramConversationData",

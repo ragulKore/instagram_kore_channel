@@ -1,34 +1,62 @@
 const config = require('../config');
 const axios = require('axios');
+const convoStatusUtil=require("./convoStatusUtil").newInstance()
 
-const koreWebhookFetch=async(message)=>{
-    console.log('in koreWebhookFetch',message)
+const koreBotHandle=async(message, userId, isNew)=>{
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': `bearer ${config.koreConfig.AUTH_TOKEN}`
             }; 
 
     const post_data={
+                "session":{
+                        "new": isNew
+                         },
                 "message":{
                        "type": "text",
                        "val":message
                        },
                "from" :{
-                   "id": "ragul.sivakumar@kore.com"
+                   "id": userId
                        }
            }  
-
+           console.log(post_data)
     try{
         const result=await axios.post(config.koreConfig.WEBHOOK_URL, post_data, { headers })
-        console.log(result.data)
+        console.log('in kore bot handle',result.data)
         return [result.data,null]
     }
     catch(error){
         console.log('in error',error)
         return [null,error]
+        
+    }
+}
+
+const koreWebhookFetch=async(message,conversationId,contactId,channel,channelId)=>{
+    console.log('in koreWebhookFetch',message,conversationId,contactId,channel,channelId)
+   
+
+    const[convoIsStarted,err1]=await convoStatusUtil.isStarted(conversationId)
+     
+    console.log(convoIsStarted)
+
+    if(convoIsStarted===0)
+    {   
+        const[result, err2]=await convoStatusUtil.Start(conversationId, contactId, channel,channelId)
+        console.log(result)
+        
+        const [response, err3]=await koreBotHandle(message,contactId,true)
+        return [response,err3]
+    }else{
+        const [response, err4]=await koreBotHandle(message,contactId,false)
+        return [response,err4]
     }
     
 }
+
+
+
 const KoreMsgPreprocessor=(requestBody)=>{
     if(requestBody.message.contact_message.text_message?.text!=undefined)
     {
@@ -41,4 +69,4 @@ const KoreMsgPreprocessor=(requestBody)=>{
     }
 
 }
-module.exports={koreWebhookFetch,KoreMsgPreprocessor}
+module.exports={koreWebhookFetch,KoreMsgPreprocessor,koreBotHandle}
