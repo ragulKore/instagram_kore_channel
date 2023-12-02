@@ -2,6 +2,27 @@ const config = require('../config');
 const axios = require('axios');
 const convoStatusUtil=require("./convoStatusUtil").newInstance()
 
+const SinchMsgPreprocessor=(data)=>{
+
+    try{
+      const sinch_msg=JSON.parse(data)
+      console.log('in SinchMsgPreprocessor crt')
+
+      return JSON.stringify(sinch_msg)
+  
+    }catch (error) {
+        if (error instanceof SyntaxError) {
+      console.log('in SinchMsgPreprocessor wrng')
+
+          console.error('JSON parsing error:', error.message);
+          return JSON.stringify({"text_message":{"text":data}})
+        }else {
+          console.error('Unexpected error:', error);
+        }
+  }
+      
+  } 
+
 const koreBotHandle=async(message, userId, isNew)=>{
     const headers = {
         'Content-Type': 'application/json',
@@ -57,6 +78,9 @@ const koreWebhookFetch=async(message,conversationId,contactId,channel,channelId)
 
 
 
+   
+
+
 const KoreMsgPreprocessor=(requestBody)=>{
     if(requestBody.message.contact_message.text_message?.text!=undefined)
     {
@@ -69,4 +93,4 @@ const KoreMsgPreprocessor=(requestBody)=>{
     }
 
 }
-module.exports={koreWebhookFetch,KoreMsgPreprocessor,koreBotHandle}
+module.exports={koreWebhookFetch,KoreMsgPreprocessor,koreBotHandle,SinchMsgPreprocessor}

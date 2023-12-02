@@ -1,5 +1,5 @@
 const fetch = require('cross-fetch');
-const {koreWebhookFetch,KoreMsgPreprocessor}=require('../utils/koreWebhookUtil')
+const {koreWebhookFetch,KoreMsgPreprocessor,SinchMsgPreprocessor}=require('../utils/koreWebhookUtil')
 const config=require('../config')
 //handler for msg handler(webhook url)
 
@@ -28,7 +28,7 @@ const incomingMsgHandler=async (req, res) => {
                 recipient: {
                     contact_id: requestBody.message.contact_id
                 },
-                message: JSON.parse(data.data[i].val),
+                message: JSON.parse(SinchMsgPreprocessor(data.data[i].val)),
                 channel_priority_order: [requestBody.message.channel_identity.channel]
             };
 
